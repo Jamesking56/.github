@@ -1,0 +1,106 @@
+{
+  "enabled": true,
+  "extends": [
+    "abandonments:recommended",
+    "config:recommended",
+    "docker:disable",
+    "group:allNonMajor",
+    "helpers:pinGitHubActionDigestsToSemver",
+    "security:minimumReleaseAgeNpm",
+    "security:openssf-scorecard",
+    ":automergeMinor",
+    ":automergePr",
+    ":combinePatchMinorReleases",
+    ":configMigration",
+    ":prConcurrentLimit10",
+    ":prImmediately",
+    ":rebaseStalePrs",
+    ":renovatePrefix",
+    ":separateMultipleMajorReleases",
+  ],
+  "dependencyDashboardAutoclose": true,
+  "ignoreDeps": [
+    "mariadb"
+  ],
+  "internalChecksFilter": "strict",
+  "labels": ["dependencies"],
+  "minimumReleaseAge": "3 days",
+  "packageRules": [
+    {
+      "updateTypes": ["minor", "patch", "digest"],
+      "automerge": true
+    },
+    {
+      "updateTypes": ["major"],
+      "automerge": false
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
+    },
+    {
+      "matchDepNames": ["php"],
+      "enabled": false
+    },
+    {
+      "matchPackagePatterns": [
+        "^larastan/larastan",
+        "^phpstan/"
+      ],
+      "groupName": "phpstan packages",
+      "groupSlug": "phpstan",
+      "separateMajorMinor": false
+    },
+    {
+      "matchPackagePatterns": ["laravel/framework"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
+      "matchPackagePatterns": [
+        "^@inertiajs/inertia.*$"
+      ],
+      "groupName": "inertia",
+      "separateMajorMinor": false
+    },
+    {
+      "matchPackagePatterns": [
+        "^pestphp/.*$"
+      ],
+      "groupName": "pest",
+      "separateMajorMinor": false
+    },
+    {
+      "matchPackagePatterns": [
+        "^vite",
+        "^laravel-vite-plugin",
+        "^@vitejs/.*$"
+      ],
+      "groupName": "vite",
+      "groupSlug": "vite",
+      "separateMajorMinor": false
+    },
+    {
+      "matchPackageNames": [
+        "prettier-plugin-tailwindcss",
+        "prettier-plugin-blade"
+      ],
+      "groupName": "prettier plugins",
+      "separateMajorMinor": false
+    }
+  ],
+  "platformAutomerge": true,
+  "rangeStrategy": "update-lockfile",
+  "reviewers": ["Jamesking56"],
+  "rollbackPrs": true,
+  "schedule": ["* 18-23 * * *"],
+  "timezone": "Europe/London",
+  "transitiveRemediation": true,
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["security"],
+    "reviewers": ["Jamesking56"],
+    "schedule": "at any time",
+    "transitiveRemediation": true
+  }
+}
